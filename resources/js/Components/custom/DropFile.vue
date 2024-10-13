@@ -146,14 +146,14 @@ const formatSize = (bytes) => {
         
 
 
-        <div class="flex flex-col border items-center justify-center rounded-md  border-white p-2 h-64" 
+        <div class="flex flex-col items-center justify-center h-64 p-2 border border-white rounded-md" 
                 @dragover.prevent="onDragOver" @dragleave="onDragLeave" @drop.prevent="onDrop"
                 :class="{ 'drag-over': isDragOver }">
 
 
             <div class="flex flex-col items-start justify-start w-full h-full space-y-2">
 
-                <div class="flex justify-center items-center rounded-full border border-white">
+                <div class="flex items-center justify-center border border-white rounded-full">
                     <button class="p-2 !text-md drop-shadow-md rounded-full shadow-md pi pi-file hover:bg-gray-400 hover:text-white transition-all hover:opacity-60" @click="triggerFileInput"></button>
                 </div>
 
@@ -178,8 +178,8 @@ const formatSize = (bytes) => {
 
                 <div v-if="previewUrl" class="flex flex-col w-full">
 
-                    <div v-if="isImage">
-                        <img  :src="previewUrl" class="w-52" alt="Pré-visualização do arquivo" />
+                    <div class="flex items-center justify-center w-full " v-if="isImage">
+                        <Image  :src="previewUrl" preview width="100" alt="Pré-visualização do arquivo" />
                     </div>
 
                     <div v-else>
@@ -188,12 +188,12 @@ const formatSize = (bytes) => {
                         <p>Tamanho: {{ fileInfo.size }} bytes</p>
                     </div>
 
-                    <div class="flex flex-row justify-center items-center w-full space-x-3">
+                    <div class="flex flex-row items-center justify-center w-full space-x-3">
 
-                        <div class="pt-4 flex  justify-center " >
+                        <div class="flex justify-center pt-4 " >
                             <i @click="uploadFile()" class="p-3  pi pi-check text-color-custom rounded-full bg-white opacity-80 text-xl font-bold text-green-500 border-[3px] border-green-700" ></i>
                         </div>
-                        <div class="pt-4 flex  justify-center" >
+                        <div class="flex justify-center pt-4" >
                             <i @click="removeFile()" class="p-3  pi pi-times text-color-custom rounded-full bg-white opacity-80 text-xl font-bold text-red-700 border-[3px] border-red-700" ></i>
                         </div>
 
@@ -203,9 +203,9 @@ const formatSize = (bytes) => {
 
                 </div>    
 
-                <div v-else class="flex flex-col w-full text-nowrap justify-center items-center space-y-3 mb-3">
+                <div v-else class="flex flex-col items-center justify-center w-full mb-3 space-y-3 text-nowrap">
 
-                    <div class="flex justify-center items-center border border-white rounded-full p-4">
+                    <div class="flex items-center justify-center p-4 border border-white rounded-full">
                         <i class="pi pi-cloud-upload !text-[35px]"></i>
                     </div>
 

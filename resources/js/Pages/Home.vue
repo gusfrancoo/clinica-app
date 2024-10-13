@@ -7,6 +7,7 @@ import { usePrimeVue } from 'primevue/config';
 const files = ref([]);
 const edit = ref(false);
 const idItem = ref('');
+const create = ref(false);
 
 async function getFiles() {
     await axios.post('/home/get-files')
@@ -30,6 +31,14 @@ async function editFile(item){
    
 }
 
+async function backToIndex(){
+    create.value = false;
+    edit.value = false;
+}
+
+async function newFile(){
+    create.value = true;
+}
 
 </script>
 
@@ -37,20 +46,30 @@ async function editFile(item){
 
     <div class="flex flex-col w-full h-full">
 
-        <div class="bg-blue-900 shadow-md drop-shadow-md h-[80px]">
+        <div class="flex flex-row w-full bg-blue-900 shadow-md drop-shadow-md h-[80px]">
+            
+            <div class="flex justify-end w-full p-5">
+                
+                <button @click="backToIndex()" class="p-2 bg-black border border-white rounded-md pi pi-arrow-left ">
+                    Voltar
+                </button>
+                
+                <button @click="newFile()" class="p-2 bg-black border border-white rounded-md pi pi-plus ">
+                    Novo Arquivo
+                </button>
+            </div>
 
         </div>
 
-
-        <div v-if="!edit" class="pt-8">
+        <div v-if="!create && !edit" class="pt-8">
 
             <div class="grid grid-cols-4 ">
     
-                <div v-for="file in files" class="w-full flex justify-center items-center">
+                <div v-for="file in files" class="flex items-center justify-center w-full">
 
                     <div @click="editFile(file)" class="flex flex-col justify-center bg-red-600  hover:bg-red-500 transition-all opacity-70 w-[220px] p-2 border-white border-2 shadoor-md drop-shadow-md ">
 
-                        <div class=" font-bold">
+                        <div class="font-bold ">
                             <div>{{ file.id }} - {{ file.file_name }}</div>
                         </div>
 
@@ -69,8 +88,12 @@ async function editFile(item){
             </div>
         </div>
 
-        <div v-if="edit" class="flex justify-center items-center pt-10  h-100">
+        <div v-if="edit" class="flex items-center justify-center pt-10 h-100">
             <DropFile :id="idItem"></DropFile>
+        </div>
+        
+        <div v-if="create" class="flex items-center justify-center pt-10 h-100">
+            <DropFile :id="null"></DropFile>
         </div>
         
     </div>

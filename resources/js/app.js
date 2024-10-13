@@ -12,6 +12,8 @@ import FileUpload from 'primevue/fileupload';
 import Button from 'primevue/button';
 import ProgressBar from 'primevue/progressbar';
 import Divider from 'primevue/divider';
+import Image from 'primevue/image';
+
 
 
 
@@ -50,6 +52,7 @@ createInertiaApp({
         vueApp.component('Button', Button);
         vueApp.component('ProgressBar', ProgressBar);
         vueApp.component('Divider', Divider);
+        vueApp.component('Image', Image);
 
         // Montando o app
         vueApp.mount(el);
